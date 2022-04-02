@@ -17,6 +17,10 @@ sudo service codedeploy-agent status
 
 rm install
 
+# associate the IAM role to your deployment server having these two policies having role
+AmazonEC2RoleforSSM
+AmazonEC2RoleforAWSCodeDeploy
+
 # Creating codedeploy
 Create the codedeploy application and deployment on the console
 
