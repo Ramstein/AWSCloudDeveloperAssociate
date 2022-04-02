@@ -1,0 +1,33 @@
+
+
+sudo yum install ruby -y
+
+# Download codedeploy install file
+# while creating a application and deploymentGroup for codedeploy in the region ap-south-1,
+it gives the option to install codedeploy for the first time and update with chron jobs.
+
+# https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html
+curl https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install > /home/ec2-user/install
+cd /home/ec2-user
+chmod +x ./install 
+sudo ./install auto
+
+# Check that codedeploy is running or not
+sudo service codedeploy-agent status
+
+rm install
+
+# Creating codedeploy
+Create the codedeploy application and deployment on the console
+
+zip revision-v2.zip appspec.yml restart_app.sh update_app.sh index.html
+
+aws s3api create-bucket --bucket my-code-deploy-rev --region ap-south-1
+aws s3 cp revision-v2.zip s3://my-code-deploy-rev/revisions/v2.zip
+
+
+# for codepipline
+1. create a codecommit repository and link the git commit, push and pull with that repository
+2. create a codepipiline with this respository and the instance, role, finally codedeploy, all for the same application
+    and deploymentGroup. 
+3. add, commit, push, codepipiline will issue the deploy, and you will see the changes in few seconds.
