@@ -1,0 +1,5 @@
+Session Manager-> Connect
+
+sudo su ec2-user
+cd /var/www/html
+nano index.html
